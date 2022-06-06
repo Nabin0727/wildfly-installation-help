@@ -1,0 +1,77 @@
+*************************************************************
+//Runs these commands as root
+
+# yum update -y
+
+# yum install java-11-openjdk-devel
+
+# groupadd -r wildfly
+
+# useradd -r -g wildfly -d /opt/wildfly -s /sbin/nologin wildfly
+
+# wget https://download.jboss.org/wildfly/19.0.0.Final/wildfly-19.0.0.Final.tar.gz -P /tmp
+
+# tar xf /tmp/wildfly-19.0.0.Final.tar.gz -C /opt/
+
+# ln -s /opt/wildfly-19.0.0.Final /opt/wildfly
+
+# chown -RH wildfly: /opt/wildfly
+
+# mkdir -p /etc/wildfly
+
+# cp/opt/wildfly/docs/contrib/scripts/systemd/wildfly.conf /etc/wildfly/
+
+# cp /opt/wildfly/docs/contrib/scripts/systemd/launch.sh /opt/wildfly/bin/
+
+# cp/opt/wildfly/docs/contrib/scripts/systemd/wildfly.service etc/systemd/system
+
+# systemctl daemon-reload
+
+# systemctl start wildfly
+
+# systemctl enable wildfly
+
+# firewall-cmd --zone=public --permanent --add-port=8080/tcp
+
+# firewall-cmd --zone=public --permanent --add-port=9990/tcp
+
+# firewall-cmd --reload
+ 
+-------Now the installation is finished we need to add the Management user---
+
+# sudo /opt/wildfly/bin/add-user.sh
+
+What type of user do you wish to add? 
+ a) Management User (mgmt-users.properties) 
+ b) Application User (application-users.properties)
+(a):
+
+-----Hit Enter------
+-----Setup Username and password-----
+
+----Type the group name you had created earlier to add on it -------
+
+
+----One more step left ----
+---Locate standalone.xml file---
+
+-- Should be in --> /opt/wildfly/standalone/configuration
+-- open standalone.xml file with your prefer editor
+
+***************************************************************
+Find the interfaces tag and change its content with following:
+
+        <interface name="management">
+            <any-address/>
+        </interface>
+        <interface name="public">
+            <any-address/>
+        </interface>
+
+--------Here we are adding <any-address/> tag so that it could be accessed ---------------
+
+Well Done!!!!
+
+
+
+
