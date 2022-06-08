@@ -19,11 +19,11 @@
 
 # mkdir -p /etc/wildfly
 
-# cp/opt/wildfly/docs/contrib/scripts/systemd/wildfly.conf /etc/wildfly/
+# cp /opt/wildfly/docs/contrib/scripts/systemd/wildfly.conf /etc/wildfly/
 
 # cp /opt/wildfly/docs/contrib/scripts/systemd/launch.sh /opt/wildfly/bin/
 
-# cp/opt/wildfly/docs/contrib/scripts/systemd/wildfly.service etc/systemd/system
+# cp /opt/wildfly/docs/contrib/scripts/systemd/wildfly.service etc/systemd/system
 
 # systemctl daemon-reload
 
